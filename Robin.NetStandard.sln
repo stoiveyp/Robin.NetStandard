@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robin.NetStandard", "Robin.NetStandard\Robin.NetStandard.csproj", "{CF9C3893-6254-4BD0-BF96-2BCFE56C869F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robin.NetStandard.Tests", "Robin.NetStandard.Tests\Robin.NetStandard.Tests.csproj", "{1CE9716F-472E-4F1E-B545-75C21FDDD0C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF9C3893-6254-4BD0-BF96-2BCFE56C869F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF9C3893-6254-4BD0-BF96-2BCFE56C869F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF9C3893-6254-4BD0-BF96-2BCFE56C869F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF9C3893-6254-4BD0-BF96-2BCFE56C869F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE9716F-472E-4F1E-B545-75C21FDDD0C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE9716F-472E-4F1E-B545-75C21FDDD0C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE9716F-472E-4F1E-B545-75C21FDDD0C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE9716F-472E-4F1E-B545-75C21FDDD0C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
