@@ -19,14 +19,14 @@ public class Device
     public string Name { get; set; }
     
     [JsonPropertyName("last_reported_at")]
-    [JsonConverter(typeof(DateTimeOffsetConverter))]
+    [JsonConverter(typeof(DateTimeOffsetParseConverter))]
     public DateTimeOffset LastReportedAt { get; set; }
     
     [JsonPropertyName("created_at")]
-    [JsonConverter(typeof(DateTimeOffsetConverter))]
+    [JsonConverter(typeof(DateTimeOffsetParseConverter))]
     public DateTimeOffset CreatedAt { get; set; }
     
     [JsonPropertyName("updated_at")]
-    [JsonConverter(typeof(DateTimeOffsetConverter))]
+    [JsonConverter(typeof(DateTimeOffsetParseConverter))]
     public DateTimeOffset UpdatedAt { get; set; }
 }

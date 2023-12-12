@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Robin.NetStandard.Converters;
 
-public class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
+public class DateTimeOffsetParseConverter : JsonConverter<DateTimeOffset>
 {
     public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

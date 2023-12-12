@@ -39,7 +39,7 @@ namespace Slack.NetStandard.Tests
                 return (expectedJsonObject,actualJsonObject);
             }
 
-            foreach (var prop in actualJsonObject)
+            foreach (var prop in actualJsonObject.ToArray())
             {
                 if (JsonNode.DeepEquals(prop.Value, expectedJsonObject[prop.Key]))
                 {
