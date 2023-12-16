@@ -2,6 +2,7 @@ using System.Collections.Specialized;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using System.Web;
 
 namespace Slack.NetStandard.Tests
@@ -11,7 +12,10 @@ namespace Slack.NetStandard.Tests
         private const string ExamplesPath = "Examples";
         public static bool CompareJson(object actual, string expectedFile, params string[] exclude)
         {
-            var actualJsonObject = JsonSerializer.SerializeToNode(actual).AsObject();
+            var actualJsonObject = JsonSerializer.SerializeToNode(actual,new JsonSerializerOptions
+            {
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            }).AsObject();
             var expected = File.ReadAllText(Path.Combine(ExamplesPath, expectedFile));
             var expectedJsonObject = JsonNode.Parse(expected).AsObject();
 

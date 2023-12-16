@@ -4,7 +4,7 @@ using Robin.NetStandard.Converters;
 
 namespace Robin.NetStandard.Entities;
 
-public class Device
+public class Device:Entity
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
@@ -25,7 +25,7 @@ public class Device
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetParseConverter))]
     public DateTimeOffset CreatedAt { get; set; }
-    
+
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(DateTimeOffsetParseConverter))]
     public DateTimeOffset UpdatedAt { get; set; }

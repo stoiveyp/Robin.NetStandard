@@ -1,0 +1,12 @@
+{
+  "id": 5,
+  "account_id": 18,
+  "name": "Robin HQ",
+  "description": "The Boston office for Robin",
+  "address": "87 Summer St. FL 2, Boston, MA",
+  "latitude": 42.353817,
+  "longitude": -71.058639,
+  "image": "https://static.robinpowered.com/apps-api/space-images/1a205a64e7b9d31472ebd1ae55717d5c.jpg",
+  "updated_at": "2014-08-08T17:04:17+0000",
+  "created_at": "2014-07-02T19:18:23+0000"
+}

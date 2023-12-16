@@ -3,7 +3,7 @@ using Robin.NetStandard.Converters;
 
 namespace Robin.NetStandard.Entities;
 
-public class Event
+public class Event:Entity
 {
    [JsonPropertyName("id")]
    public string Id { get; set; }
