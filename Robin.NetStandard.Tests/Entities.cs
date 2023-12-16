@@ -26,6 +26,12 @@ public class Entities
         EnsureEntityMatches<Location>("Location.json", "updated_at", "created_at");
     }
 
+    [Fact]
+    public void Organization()
+    {
+        EnsureEntityMatches<Organization>("Organization.json", "updated_at", "created_at");
+    }
+
     private void EnsureEntityMatches<T>(string filename, params string[] excludedProperties) where T : Entity
     {
         var entity = Utility.ExampleFileContent<T>(filename)!;
