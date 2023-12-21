@@ -48,6 +48,12 @@ public class Entities
         EnsureEntityMatches<FreeBusy>("FreeBusy.json", "from", "to", "date_time", "started_at", "ended_at");
     }
 
+    [Fact]
+    public void Presence()
+    {
+        EnsureEntityMatches<Presence>("last_seen_at", "arrived_at", "expired_at");
+    }
+
     private void EnsureEntityMatches<T>(params string[] excludedProperties) where T : Entity
     {
         var filename = $"{typeof(T).Name}.json";
