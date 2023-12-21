@@ -54,6 +54,12 @@ public class Entities
         EnsureEntityMatches<Presence>("last_seen_at", "arrived_at", "expired_at");
     }
 
+    [Fact]
+    public void Zone()
+    {
+        EnsureEntityMatches<Zone>();
+    }
+
     private void EnsureEntityMatches<T>(params string[] excludedProperties) where T : Entity
     {
         var filename = $"{typeof(T).Name}.json";

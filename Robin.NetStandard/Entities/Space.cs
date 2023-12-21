@@ -11,6 +11,9 @@ namespace Robin.NetStandard.Entities
         [JsonPropertyName("location_id")]
         public int LocationId { get; set; }
 
+        [JsonPropertyName("level_id")]
+        public int? LevelId { get; set; }
+
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
