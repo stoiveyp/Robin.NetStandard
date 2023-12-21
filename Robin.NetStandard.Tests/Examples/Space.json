@@ -1,0 +1,16 @@
+{
+  "id": 78,
+  "location_id": 5,
+  "name": "Conference Room",
+  "description": "Front meeting space for up to 14 people.",
+  "image": "https://static.robinpowered.com/apps-api/space-images/014d9bbab4f9efe3102db1e05c8898a4.jpg",
+  "discovery_radius": 3.5,
+  "capacity": 10,
+  "type": "conference",
+  "last_presence_at": "2014-10-16T13:33:21+0000",
+  "is_disabled": false,
+  "is_dibsed": false,
+  "is_accessible": true,
+  "updated_at": "2014-08-22T14:37:02+0000",
+  "created_at": "2014-08-21T14:50:12+0000"
+}

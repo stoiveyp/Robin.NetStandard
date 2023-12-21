@@ -31,9 +31,9 @@ public class Invitee
     
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(DateTimeOffsetParseConverter))]
-    public DateTimeOffset UpdatedAt { get; set; }
+    public DateTimeOffset? UpdatedAt { get; set; }
     
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetParseConverter))]
-    public DateTimeOffset CreatedAt { get; set; }
+    public DateTimeOffset? CreatedAt { get; set; }
 }

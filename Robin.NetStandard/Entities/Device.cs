@@ -20,13 +20,13 @@ public class Device:Entity
     
     [JsonPropertyName("last_reported_at")]
     [JsonConverter(typeof(DateTimeOffsetParseConverter))]
-    public DateTimeOffset LastReportedAt { get; set; }
+    public DateTimeOffset? LastReportedAt { get; set; }
     
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetParseConverter))]
-    public DateTimeOffset CreatedAt { get; set; }
+    public DateTimeOffset? CreatedAt { get; set; }
 
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(DateTimeOffsetParseConverter))]
-    public DateTimeOffset UpdatedAt { get; set; }
+    public DateTimeOffset? UpdatedAt { get; set; }
 }
