@@ -9,44 +9,48 @@ public class Entities
     [Fact]
     public void Device()
     {
-        EnsureEntityMatches<Device>("Device.json", 
-            "last_reported_at");
+        EnsureEntityMatches<Device>("last_reported_at");
     }
 
     [Fact]
     public void Event()
     {
-        EnsureEntityMatches<Event>("Event.json", 
-            "date_time", "started_at", "ended_at");
+        EnsureEntityMatches<Event>("date_time", "started_at", "ended_at");
     }
 
     [Fact]
     public void Location()
     {
-        EnsureEntityMatches<Location>("Location.json");
+        EnsureEntityMatches<Location>();
     }
 
     [Fact]
     public void Organization()
     {
-        EnsureEntityMatches<Organization>("Organization.json");
+        EnsureEntityMatches<Organization>();
     }
 
     [Fact]
     public void User()
     {
-        EnsureEntityMatches<User>("User.json");
+        EnsureEntityMatches<User>();
     }
 
     [Fact]
     public void Space()
     {
-        EnsureEntityMatches<Space>("Space.json", "last_presence_at");
-        //
+        EnsureEntityMatches<Space>("last_presence_at");
     }
 
-    private void EnsureEntityMatches<T>(string filename, params string[] excludedProperties) where T : Entity
+    [Fact]
+    public void FreeBusy()
     {
+        EnsureEntityMatches<FreeBusy>("FreeBusy.json", "from", "to", "date_time", "started_at", "ended_at");
+    }
+
+    private void EnsureEntityMatches<T>(params string[] excludedProperties) where T : Entity
+    {
+        var filename = $"{typeof(T).Name}.json";
         var entity = Utility.ExampleFileContent<T>(filename)!;
         Assert.Null(entity.OtherProperties);
         Assert.True(Utility.CompareJson(entity, filename, excludedProperties.Concat(new []{ "created_at", "updated_at" }).ToArray()));

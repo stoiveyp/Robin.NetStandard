@@ -24,7 +24,7 @@ namespace Robin.NetStandard.Entities
         public double? DiscoveryRadius { get; set; }
 
         [JsonPropertyName("capacity")]
-        public int Capacity { get; set; }
+        public int? Capacity { get; set; }
 
         [JsonPropertyName("last_presence_at")]
         [JsonConverter(typeof(DateTimeOffsetParseConverter))]
@@ -34,13 +34,13 @@ namespace Robin.NetStandard.Entities
         public string Type { get; set; }
 
         [JsonPropertyName("is_disabled")]
-        public bool IsDisabled { get; set; }
+        public bool? IsDisabled { get; set; }
 
         [JsonPropertyName("is_dibsed")]
-        public bool IsDibsed { get; set; }
+        public bool? IsDibsed { get; set; }
 
         [JsonPropertyName("is_accessible")]
-        public bool IsAccessible { get; set; }
+        public bool? IsAccessible { get; set; }
 
         [JsonPropertyName("updated_at")]
         [JsonConverter(typeof(DateTimeOffsetParseConverter))]

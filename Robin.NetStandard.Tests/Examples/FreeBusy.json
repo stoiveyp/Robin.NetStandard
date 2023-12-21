@@ -1,0 +1,52 @@
+{
+  "has_presence": false,
+  "space": {
+    "id": 50,
+    "location_id": 10,
+    "name": "Conference Room"
+  },
+  "busy": [
+    {
+      "from": "2018-03-10T16:00:00+0000",
+      "to": "2018-03-10T17:00:00+0000",
+      "events": [
+        {
+          "id": "17568519_20161114T113000Z",
+          "series_id": "17568519",
+          "recurrence_id": "20161114T113000Z",
+          "uid": "3ujog6avl5cvtgigvsllp7h0og@google.com",
+          "space_id": 50,
+          "start": {
+            "date_time": "2018-03-10T16:00:00+0000",
+            "time_zone": "UTC"
+          },
+          "end": {
+            "date_time": "2018-03-10T17:00:00+0000",
+            "time_zone": "UTC"
+          }
+        }
+      ]
+    },
+    {
+      "from": "2018-03-13T15:50:00+0000",
+      "to": "2018-03-13T16:00:00+0000",
+      "events": [
+        {
+          "id": "35655066_20180313T155000Z",
+          "series_id": "35655066",
+          "recurrence_id": "20180313T155000Z",
+          "uid": "lue7n8iljrpq229dkcr11tvl8g@google.com",
+          "space_id": 50,
+          "start": {
+            "date_time": "2018-03-13T11:50:00-0400",
+            "time_zone": "America/New_York"
+          },
+          "end": {
+            "date_time": "2018-03-13T12:00:00-0400",
+            "time_zone": "America/New_York"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -9,13 +9,13 @@ public class Event:Entity
    public string Id { get; set; }
    
    [JsonPropertyName("organizer_id")]
-   public int OrganizerId { get; set; }
+   public int? OrganizerId { get; set; }
    
    [JsonPropertyName("organizer_email")]
    public string OrganizerEmail { get; set; }
    
    [JsonPropertyName("creator_id")]
-   public int CreatorId { get; set; }
+   public int? CreatorId { get; set; }
    
    [JsonPropertyName("creator_email")]
    public string CreatorEmail { get; set; }
