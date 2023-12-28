@@ -1,0 +1,9 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+# Scratch file for testing Robin calls during development
+
+@base = https://api.robinpowered.com/v1.0
+@token = <insert token>
+
+GET {{base}}/auth
+Authorization: Access-Token {{token}}
+Accept: application/json

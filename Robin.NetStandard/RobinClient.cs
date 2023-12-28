@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using System.Net;
-using System.Runtime.ExceptionServices;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace Robin.NetStandard;
 
-public class RobinClient
+public class RobinClient:IRobinClient
 {
     public static string DefaultBaseUrl = "https://api.robinpowered.com/v1.0/";
 
@@ -18,7 +13,10 @@ public class RobinClient
 
     public string Token { get; set; }
 
-    public RobinClient(string token):this(null,token){}
+    private IAuthApi? _auth;
+    public IAuthApi Auth => _auth ??= new AuthApi(this);
+
+    public RobinClient(string token) : this(null, token) { }
 
     public RobinClient(HttpClient? client, string token)
     {
@@ -26,25 +24,29 @@ public class RobinClient
         Token = token;
     }
 
-    async Task<TResponse> IWebApiClient.MakeJsonCall<TRequest, TResponse>(HttpMethod method, string path, TRequest request)
+    async Task<ApiResponse<TResponse?>?> IRobinClient.MakeJsonCall<TResponse>(HttpMethod method, string path) where TResponse : default
     {
-        try
-        {
-            var content = new StringContent(JsonConvert.SerializeObject(request));
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
+        var message = new HttpRequestMessage(HttpMethod.Get, PathUrl(path));
+        message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        HandleAuth(message);
 
-            var message = new HttpRequestMessage(HttpMethod.Post, PathUrl(path)) { Content = content };
-            message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HandleAuth(message);
+        var response = await Client.SendAsync(message);
+        var stream = await response.Content.ReadAsStreamAsync();
+        return await JsonSerializer.DeserializeAsync<ApiResponse<TResponse?>>(stream);
+    }
 
-            var response = await Client.SendAsync(message);
-            return await JsonSerializer<TResponse>(response);
-        }
-        catch (WebException ex)
-        {
-            var source = ExceptionDispatchInfo.Capture(ex);
-            return ProcessSlackException<TResponse>(ex, source);
-        }
+    async Task<ApiResponse<TResponse?>?> IRobinClient.MakeJsonCall<TRequest, TResponse>(HttpMethod method, string path, TRequest request) where TResponse : default
+    {
+        var content = new StringContent(JsonSerializer.Serialize(request));
+        content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
+
+        var message = new HttpRequestMessage(HttpMethod.Post, PathUrl(path)) { Content = content };
+        message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        HandleAuth(message);
+
+        var response = await Client.SendAsync(message);
+        var stream = await response.Content.ReadAsStreamAsync();
+        return await JsonSerializer.DeserializeAsync<ApiResponse<TResponse?>>(stream);
     }
 
     private static Uri PathUrl(string methodCall) => new(new Uri(DefaultBaseUrl), methodCall);
