@@ -28,6 +28,9 @@
 
 
     <ItemGroup>
+      <None Update="Examples\Web_Auth.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
       <None Update="Examples\Zone.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
