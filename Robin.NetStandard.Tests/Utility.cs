@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using System.Web;
+using Robin.NetStandard;
 
 namespace Slack.NetStandard.Tests
 {
@@ -117,6 +118,14 @@ namespace Slack.NetStandard.Tests
         public static string ExampleFileContent(string expectedFile)
         {
             return File.ReadAllText(Path.Combine(ExamplesPath, expectedFile));
+        }
+
+        internal static void ValidateApiCall(HttpMethod method, string path, HttpRequestMessage req)
+        {
+            Assert.Equal(HttpMethod.Get, method);
+            Assert.Equal(new Uri(new Uri(RobinClient.DefaultBaseUrl),path).ToString(), req.RequestUri.ToString());
+            Assert.Equal("Access-Token", req.Headers.Authorization.Scheme);
+            Assert.Equal("token", req.Headers.Authorization.Parameter);
         }
     }
 }

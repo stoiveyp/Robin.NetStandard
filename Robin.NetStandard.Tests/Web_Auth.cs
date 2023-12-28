@@ -13,10 +13,7 @@ public class WebAuth
         var res = Utility.ExampleFileContent<ApiResponse<AuthData>>("Web_Auth.json")!;
         var client = new RobinClient(new HttpClient(new ActionHandler(req =>
         {
-            Assert.Equal(HttpMethod.Get, req.Method);
-            Assert.Equal("https://api.robinpowered.com/v1.0/auth",req.RequestUri.ToString());
-            Assert.Equal("Access-Token", req.Headers.Authorization.Scheme);
-            Assert.Equal("token", req.Headers.Authorization.Parameter);
+            Utility.ValidateApiCall(HttpMethod.Get,"auth",req);
         }, res)),"token");
 
         var response = await client.Auth.TokenInfo();

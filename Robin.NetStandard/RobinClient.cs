@@ -16,6 +16,9 @@ public class RobinClient:IRobinClient
     private IAuthApi? _auth;
     public IAuthApi Auth => _auth ??= new AuthApi(this);
 
+    private IOrganizationApi? _org;
+    public IOrganizationApi Organization => _org ??= new OrganizationApi(this);
+
     public RobinClient(string token) : this(null, token) { }
 
     public RobinClient(HttpClient? client, string token)
@@ -27,23 +30,24 @@ public class RobinClient:IRobinClient
     async Task<ApiResponse<TResponse?>?> IRobinClient.MakeJsonCall<TResponse>(HttpMethod method, string path) where TResponse : default
     {
         var message = new HttpRequestMessage(HttpMethod.Get, PathUrl(path));
-        message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        HandleAuth(message);
 
-        var response = await Client.SendAsync(message);
-        var stream = await response.Content.ReadAsStreamAsync();
-        return await JsonSerializer.DeserializeAsync<ApiResponse<TResponse?>>(stream);
+        HandleAuth(message);
+        return await MakeRequest<TResponse>(message);
     }
 
     async Task<ApiResponse<TResponse?>?> IRobinClient.MakeJsonCall<TRequest, TResponse>(HttpMethod method, string path, TRequest request) where TResponse : default
     {
         var content = new StringContent(JsonSerializer.Serialize(request));
         content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
-
         var message = new HttpRequestMessage(HttpMethod.Post, PathUrl(path)) { Content = content };
-        message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        HandleAuth(message);
 
+        HandleAuth(message);
+        return await MakeRequest<TResponse>(message);
+    }
+
+    private async Task<ApiResponse<TResponse?>?> MakeRequest<TResponse>(HttpRequestMessage message)
+    {
+        message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         var response = await Client.SendAsync(message);
         var stream = await response.Content.ReadAsStreamAsync();
         return await JsonSerializer.DeserializeAsync<ApiResponse<TResponse?>>(stream);
