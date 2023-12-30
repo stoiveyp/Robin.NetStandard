@@ -60,6 +60,12 @@ public class Entities
         EnsureEntityMatches<Zone>();
     }
 
+    [Fact]
+    public void Level()
+    {
+        EnsureEntityMatches<Level>();
+    }
+
     private void EnsureEntityMatches<T>(params string[] excludedProperties) where T : Entity
     {
         var filename = $"{typeof(T).Name}.json";

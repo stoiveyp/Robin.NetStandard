@@ -11,7 +11,7 @@ namespace Slack.NetStandard.Tests
     public static class Utility
     {
         private const string ExamplesPath = "Examples";
-        public static bool CompareJson(object actual, string expectedFile, params string[] exclude)
+        public static bool CompareJson(object? actual, string expectedFile, params string[] exclude)
         {
             var actualJsonObject = JsonSerializer.SerializeToNode(actual,new JsonSerializerOptions
             {
