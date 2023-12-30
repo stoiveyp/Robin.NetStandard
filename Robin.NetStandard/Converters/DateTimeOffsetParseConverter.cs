@@ -13,7 +13,7 @@ public class DateTimeOffsetParseConverter : JsonConverter<DateTimeOffset?>
         {
             return null;
         }
-        return DateTimeOffset.Parse(reader.GetString());
+        return DateTimeOffset.Parse(value);
     }
 
     public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options)

@@ -11,8 +11,8 @@ public class AuthApi : IAuthApi
         Client = client;
     }
 
-    public Task<ApiResponse<AuthData>> TokenInfo()
+    public Task<ApiResponse<AuthData?>?> TokenInfo()
     {
-        return Client.MakeJsonCall<AuthData>(HttpMethod.Get,"auth");
+        return Client.MakeJsonCall<ApiResponse<AuthData?>>(HttpMethod.Get,"auth");
     }
 }

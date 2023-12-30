@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Collections.Specialized;
+using System.Net.Http.Headers;
 using System.Text.Json;
 
 namespace Robin.NetStandard;
@@ -27,15 +28,15 @@ public class RobinClient:IRobinClient
         Token = token;
     }
 
-    async Task<ApiResponse<TResponse?>?> IRobinClient.MakeJsonCall<TResponse>(HttpMethod method, string path) where TResponse : default
+    async Task<TResponse?> IRobinClient.MakeJsonCall<TResponse>(HttpMethod method, string path, Dictionary<string, string>? query = null) where TResponse : default
     {
-        var message = new HttpRequestMessage(HttpMethod.Get, PathUrl(path));
+        var message = new HttpRequestMessage(HttpMethod.Get, PathUrl(path, query));
 
         HandleAuth(message);
         return await MakeRequest<TResponse>(message);
     }
 
-    async Task<ApiResponse<TResponse?>?> IRobinClient.MakeJsonCall<TRequest, TResponse>(HttpMethod method, string path, TRequest request) where TResponse : default
+    async Task<TResponse?> IRobinClient.MakeJsonCall<TRequest, TResponse>(HttpMethod method, string path, TRequest request) where TResponse : default
     {
         var content = new StringContent(JsonSerializer.Serialize(request));
         content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
@@ -45,15 +46,31 @@ public class RobinClient:IRobinClient
         return await MakeRequest<TResponse>(message);
     }
 
-    private async Task<ApiResponse<TResponse?>?> MakeRequest<TResponse>(HttpRequestMessage message)
+    private async Task<TResponse?> MakeRequest<TResponse>(HttpRequestMessage message)
     {
         message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         var response = await Client.SendAsync(message);
         var stream = await response.Content.ReadAsStreamAsync();
-        return await JsonSerializer.DeserializeAsync<ApiResponse<TResponse?>>(stream);
+        return await JsonSerializer.DeserializeAsync<TResponse?>(stream);
     }
 
-    private static Uri PathUrl(string methodCall) => new(new Uri(DefaultBaseUrl), methodCall);
+    private static Uri PathUrl(string methodCall, Dictionary<string, string>? query = null) => new(new Uri(DefaultBaseUrl), methodCall + CreateQueryString(query));
+
+    private static string CreateQueryString(Dictionary<string, string>? query)
+    {
+        if (!query?.Any() ?? true)
+        {
+            return string.Empty;
+        }
+
+        NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
+        foreach (var q in query)
+        {
+            queryString.Add(q.Key, q.Value);
+        }
+
+        return "?" + queryString!;
+    }
 
     private void HandleAuth(HttpRequestMessage message)
     {

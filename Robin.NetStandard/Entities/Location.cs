@@ -35,6 +35,9 @@ namespace Robin.NetStandard.Entities
         [JsonPropertyName("longitude")]
         public double Longitude { get; set; }
 
+        [JsonPropertyName("is_visitor_management_enabled")]
+        public bool? IsVisitorManagementEnabled { get; set; }
+
         [JsonPropertyName("updated_at")]
         [JsonConverter(typeof(DateTimeOffsetParseConverter))]
         public DateTimeOffset? UpdatedAt { get; set; }
@@ -42,5 +45,8 @@ namespace Robin.NetStandard.Entities
         [JsonPropertyName("created_at")]
         [JsonConverter(typeof(DateTimeOffsetParseConverter))]
         public DateTimeOffset? CreatedAt { get; set; }
+
+        [JsonPropertyName("working_hours")] 
+        public WorkingDay[] WorkingHours { get; set; }
     }
 }
