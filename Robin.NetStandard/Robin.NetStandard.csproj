@@ -14,6 +14,7 @@
 	    <RepositoryUrl>https://github.com/stoiveyp/Robin.NetStandard</RepositoryUrl>
 	    <Description>Small .NET Library to provide support for the Robin reservation system API</Description>
 	    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	    <PackageId>PoweredBy$(AssemblyName)</PackageId>
     </PropertyGroup>
 
     <ItemGroup>
