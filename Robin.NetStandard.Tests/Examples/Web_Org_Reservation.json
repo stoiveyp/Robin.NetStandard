@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "status_code": 200,
+    "status": "OK",
+    "message": "",
+    "more_info": {},
+    "errors": []
+  },
+  "data": [
+    {
+      "id": "10000000",
+      "seat_id": 10000,
+      "reserver_id": 100000,
+      "type": "hoteled",
+      "start": {
+        "date_time": "2024-01-22T07:00:00+0000",
+        "time_zone": "Europe/London"
+      },
+      "end": {
+        "date_time": "2024-01-22T17:30:00+0000",
+        "time_zone": "Europe/London"
+      },
+      "created_at": "2024-01-08T17:58:28+0000",
+      "updated_at": "2024-01-08T17:58:28+0000",
+      "reservee": {
+        "email": "test@test.com",
+        "user_id": 100000,
+        "participation_status": "not_responded"
+      }
+    }
+  ],
+  "paging": {
+    "page": 2,
+    "per_page": 1,
+    "has_next_page": true
+  }
+}

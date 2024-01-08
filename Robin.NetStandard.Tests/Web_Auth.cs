@@ -11,7 +11,7 @@ public class WebAuth
     public async Task GetData()
     {
         var res = Utility.ExampleFileContent<ApiResponse<AuthData>>("Web_Auth.json")!;
-        var client = new RobinClient(new HttpClient(new ActionHandler(req =>
+        var client = (IRobinApi)new RobinClient(new HttpClient(new ActionHandler(req =>
         {
             Utility.ValidateApiCall(HttpMethod.Get,"auth",req);
         }, res)),"token");

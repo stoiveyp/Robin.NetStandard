@@ -24,6 +24,6 @@ public class DateTimeOffsetParseConverter : JsonConverter<DateTimeOffset?>
             return;
         }
 
-        writer.WriteStringValue(value.Value.ToString("O"));
+        writer.WriteStringValue(value.Value.ToString("yyyy-MM-ddTHH:mm:sszzz"));
     }
 }
