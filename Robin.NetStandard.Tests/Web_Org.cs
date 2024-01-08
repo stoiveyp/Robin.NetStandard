@@ -10,7 +10,7 @@ public class WebOrg
     {
         var res = Utility.ExampleFileContent<ApiResponse<Organization?>?>("Web_Org.json")!;
         var client =
-            new RobinClient(
+            (IRobinApi)new RobinClient(
                 new HttpClient(
                     new ActionHandler(req => { Utility.ValidateApiCall(HttpMethod.Get, "organizations/34", req); },
                         res)), "token");
@@ -24,7 +24,7 @@ public class WebOrg
     {
         var res = Utility.ExampleFileContent<PagedApiResponse<Location[]?>?>("Web_Org_Location.json")!;
         var client =
-            new RobinClient(
+            (IRobinApi)new RobinClient(
                 new HttpClient(new ActionHandler(
                     req =>
                     {
@@ -41,7 +41,7 @@ public class WebOrg
     {
         var res = Utility.ExampleFileContent<PagedApiResponse<User[]?>?>("Web_Org_Users.json")!;
         var client =
-            new RobinClient(
+            (IRobinApi)new RobinClient(
                 new HttpClient(new ActionHandler(
                     req =>
                     {

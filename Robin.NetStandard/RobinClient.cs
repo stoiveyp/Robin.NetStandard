@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Robin.NetStandard;
 
-public class RobinClient:IRobinClient
+public class RobinClient:IRobinClient, IRobinApi
 {
     public static string DefaultBaseUrl = "https://api.robinpowered.com/v1.0/";
 
@@ -19,6 +19,9 @@ public class RobinClient:IRobinClient
 
     private IOrganizationApi? _org;
     public IOrganizationApi Organization => _org ??= new OrganizationApi(this);
+
+    private IReservationApi? _res;
+    public IReservationApi Reservation => _res ??= new ReservationApi(this);
 
     public RobinClient(string token) : this(null, token) { }
 
