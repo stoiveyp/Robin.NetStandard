@@ -6,6 +6,8 @@ namespace Robin.NetStandard.Converters;
 
 public class DateTimeOffsetParseConverter : JsonConverter<DateTimeOffset?>
 {
+    public static string ToStringFormat = "yyyy-MM-ddTHH:mm:sszzz";
+
     public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var value = reader.GetString();
@@ -24,6 +26,6 @@ public class DateTimeOffsetParseConverter : JsonConverter<DateTimeOffset?>
             return;
         }
 
-        writer.WriteStringValue(value.Value.ToString("O"));
+        writer.WriteStringValue(value.Value.ToString(ToStringFormat));
     }
 }
