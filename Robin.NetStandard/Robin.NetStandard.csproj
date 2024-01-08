@@ -5,7 +5,23 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
+        <Title>Robin.NetStandard</Title>
+	    <Version>0.1-alpha</Version>
+	    <Authors>Steven Pears</Authors>
+	    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	    <PackageReadmeFile>README.md</PackageReadmeFile>
+	    <PackageProjectUrl>https://github.com/stoiveyp/Robin.NetStandard</PackageProjectUrl>
+	    <RepositoryUrl>https://github.com/stoiveyp/Robin.NetStandard</RepositoryUrl>
+	    <Description>Small .NET Library to provide support for the Robin reservation system API</Description>
+	    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+    </ItemGroup>
 
 
     <ItemGroup>
