@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <Title>PoweredByRobin.NetStandard</Title>
-	    <Version>0.2-alpha</Version>
+	    <Version>0.2.1-alpha</Version>
 	    <Authors>Steven Pears</Authors>
 	    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	    <PackageReadmeFile>README.md</PackageReadmeFile>
