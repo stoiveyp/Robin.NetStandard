@@ -18,5 +18,5 @@ public class ApiMetadata
     public Dictionary<string, object> MoreInfo { get; set; }
 
     [JsonPropertyName("errors")]
-    public string[] Errors { get; set; }
+    public Error[] Errors { get; set; }
 }
