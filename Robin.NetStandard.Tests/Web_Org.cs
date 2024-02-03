@@ -1,4 +1,5 @@
 using Robin.NetStandard.Entities;
+using Robin.NetStandard.Organizations;
 using Slack.NetStandard.Tests;
 
 namespace Robin.NetStandard.Tests;
@@ -12,10 +13,10 @@ public class WebOrg
         var client =
             (IRobinApi)new RobinClient(
                 new HttpClient(
-                    new ActionHandler(req => { Utility.ValidateApiCall(HttpMethod.Get, "organizations/34", req); },
+                    new ActionHandler(req => { Utility.ValidateApiCall(HttpMethod.Get, "organizations/test", req); },
                         res)), "token");
 
-        var response = await client.Organization.Get(34);
+        var response = await client.Organization.Get("test");
         Assert.True(Utility.CompareJson(response, "Web_Org.json", ["created_at", "updated_at"]));
     }
 
@@ -32,7 +33,14 @@ public class WebOrg
                             "organizations/34/locations?query=not&page=2&per_page=2", req);
                     }, res)), "token");
 
-        var response = await client.Organization.GetLocations(34, perPage: 2, query: "not", page: 2);
+        var request = new GetLocationRequest
+        {
+            Id = 34,
+            PerPage = 2,
+            Query = "not",
+            Page = 2
+        };
+        var response = await client.Organization.GetLocations(request);
         Assert.True(Utility.CompareJson(response, "Web_Org_Location.json", ["created_at", "updated_at"]));
     }
 
@@ -49,7 +57,16 @@ public class WebOrg
                             "organizations/34/users?query=not&page=2&per_page=2&ids=1%2c2%2c3", req);
                     }, res)), "token");
 
-        var response = await client.Organization.GetUsers(34, perPage: 2, query: "not", ids:["1","2","3"],page: 2);
+
+        var request = new GetUsersRequest
+        {
+            Id = 34,
+            PerPage = 2,
+            Query = "not",
+            Page = 2,
+            Ids = ["1", "2", "3"]
+        };
+        var response = await client.Organization.GetUsers(request);
         Assert.True(Utility.CompareJson(response, "Web_Org_Users.json", ["created_at", "updated_at"]));
     }
 }

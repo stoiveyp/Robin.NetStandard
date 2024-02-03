@@ -31,7 +31,7 @@ public class RobinClient:IRobinClient, IRobinApi
         Token = token;
     }
 
-    async Task<TResponse?> IRobinClient.MakeJsonCall<TResponse>(HttpMethod method, string path, Dictionary<string, string>? query = null) where TResponse : default
+    async Task<TResponse?> IRobinClient.MakeJsonCall<TResponse>(HttpMethod method, string path, Dictionary<string, string>? query) where TResponse : default
     {
         var message = new HttpRequestMessage(HttpMethod.Get, PathUrl(path, query));
 

@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Robin.NetStandard.Reservations
+﻿namespace Robin.NetStandard.Reservations
 {
     public class ReservationSearchRequest
     {

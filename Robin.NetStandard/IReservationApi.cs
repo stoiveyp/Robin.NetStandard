@@ -5,5 +5,5 @@ namespace Robin.NetStandard;
 
 public interface IReservationApi
 {
-    Task<PagedApiResponse<Reservation[]?>?> Search(ReservationSearchRequest request);
+    Task<PagedApiResponse<Reservation[]?>?> Get(ReservationSearchRequest? request);
 }

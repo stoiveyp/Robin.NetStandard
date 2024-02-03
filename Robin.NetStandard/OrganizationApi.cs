@@ -1,5 +1,5 @@
 ﻿using Robin.NetStandard.Entities;
-using System.Security.Cryptography;
+using Robin.NetStandard.Organizations;
 
 namespace Robin.NetStandard;
 
@@ -12,49 +12,38 @@ public class OrganizationApi : IOrganizationApi
         Client = client;
     }
 
-    public Task<ApiResponse<Organization?>?> Get(int id)
-    {
-        return Get(id.ToString());
-    }
-
-    public Task<PagedApiResponse<Location[]?>?> GetLocations(int orgId, string? query = null, int? page = null,
-        int? perPage = null)
-    {
-        return GetLocations(orgId.ToString(), query, page, perPage);
-    }
-
-    public Task<PagedApiResponse<User[]?>?> GetUsers(int orgId, string? query = null, int? page = null,
-        int? perPage = null, string[]? ids = null)
-    {
-        return GetUsers(orgId.ToString(), query, page, perPage, ids);
-    }
-
-    public Task<ApiResponse<Organization?>?> Get(string slug)
+    public Task<ApiResponse<Organization?>?> Get(OrganizationId slug)
     {
         return Client.MakeJsonCall<ApiResponse<Organization?>>(HttpMethod.Get, $"organizations/{slug}");
     }
 
-    public Task<PagedApiResponse<Location[]?>?> GetLocations(string slug, string? query = null, int? page = null, int? perPage = null)
+    public Task<PagedApiResponse<Location[]?>?> GetLocations(OrganizationId orgId) =>
+        GetLocations(new GetLocationRequest { Id = orgId });
+
+    public Task<PagedApiResponse<Location[]?>?> GetLocations(GetLocationRequest request)
     {
         var prms = new Dictionary<string, string>();
-        prms.AddIfNotEmpty(nameof(query), query);
-        prms.AddIfNotEmpty(nameof(page), page?.ToString());
-        prms.AddIfNotEmpty("per_page", perPage?.ToString());
-        return Client.MakeJsonCall<PagedApiResponse<Location[]?>>(HttpMethod.Get, $"organizations/{slug}/locations", prms);
+        prms.AddIfNotEmpty("query", request.Query);
+        prms.AddIfNotEmpty("page", request.Page?.ToString());
+        prms.AddIfNotEmpty("per_page", request.PerPage?.ToString());
+        return Client.MakeJsonCall<PagedApiResponse<Location[]?>>(HttpMethod.Get, $"organizations/{request.Id}/locations", prms);
 
     }
 
-    public Task<PagedApiResponse<User[]?>?> GetUsers(string slug, string? query = null, int? page = null, int? perPage = null, string[]? ids = null)
+    public Task<PagedApiResponse<User[]?>?> GetUsers(OrganizationId orgId) =>
+        GetUsers(new GetUsersRequest { Id = orgId });
+
+    public Task<PagedApiResponse<User[]?>?> GetUsers(GetUsersRequest request)
     {
         var prms = new Dictionary<string, string>();
-        prms.AddIfNotEmpty(nameof(query), query);
-        prms.AddIfNotEmpty(nameof(page), page?.ToString());
-        prms.AddIfNotEmpty("per_page", perPage?.ToString());
-        if (ids?.Any() ?? false)
+        prms.AddIfNotEmpty("query", request.Query);
+        prms.AddIfNotEmpty("page",request.Page?.ToString());
+        prms.AddIfNotEmpty("per_page", request.PerPage?.ToString());
+        if (request.Ids?.Any() ?? false)
         {
-            prms.Add(nameof(ids), string.Join(",", ids));
+            prms.Add("ids", string.Join(",", request.Ids));
         }
 
-        return Client.MakeJsonCall<PagedApiResponse<User[]?>>(HttpMethod.Get, $"organizations/{slug}/users", prms);
+        return Client.MakeJsonCall<PagedApiResponse<User[]?>>(HttpMethod.Get, $"organizations/{request.Id}/users", prms);
     }
 }

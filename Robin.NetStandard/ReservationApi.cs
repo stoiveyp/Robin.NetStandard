@@ -13,22 +13,27 @@ public class ReservationApi : IReservationApi
         Client = client;
     }
 
-    public Task<PagedApiResponse<Reservation[]?>?> Search(ReservationSearchRequest request)
+    public Task<PagedApiResponse<Reservation[]?>?> Get(ReservationSearchRequest? request)
     {
-        var dict = new Dictionary<string, string>();
-        if (request.LevelIds?.Any() ?? false)
-        {
-            dict.Add("level_ids",string.Join(',',request.LevelIds));
-        }
+        Dictionary<string,string>? dict = null;
 
-        if (request.Before.HasValue)
+        if (request != null)
         {
-            dict.Add("before", request.Before.Value.ToString(DateTimeOffsetParseConverter.ToStringFormat));
-        }
+            dict = [];
+            if (request.LevelIds?.Any() ?? false)
+            {
+                dict.Add("level_ids", string.Join(',', request.LevelIds));
+            }
 
-        if (request.After.HasValue)
-        {
-            dict.Add("after", request.After.Value.ToString(DateTimeOffsetParseConverter.ToStringFormat));
+            if (request.Before.HasValue)
+            {
+                dict.Add("before", request.Before.Value.ToString(DateTimeOffsetParseConverter.ToStringFormat));
+            }
+
+            if (request.After.HasValue)
+            {
+                dict.Add("after", request.After.Value.ToString(DateTimeOffsetParseConverter.ToStringFormat));
+            }
         }
 
         return Client.MakeJsonCall<PagedApiResponse<Reservation[]?>>(HttpMethod.Get, $"reservations/seats", dict);
