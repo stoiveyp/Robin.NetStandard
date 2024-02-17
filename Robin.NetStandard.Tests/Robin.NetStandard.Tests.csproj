@@ -31,6 +31,9 @@
       <None Update="Examples\Level.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="Examples\Web_Space_Seats.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
       <None Update="Examples\Web_Org_Reservation.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>

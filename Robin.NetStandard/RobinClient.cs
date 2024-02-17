@@ -23,6 +23,9 @@ public class RobinClient:IRobinClient, IRobinApi
     private IReservationApi? _res;
     public IReservationApi Reservation => _res ??= new ReservationApi(this);
 
+    private ISpaceApi? _space;
+    public ISpaceApi Space => _space ??= new SpaceApi(this);
+
     public RobinClient(string token) : this(null, token) { }
 
     public RobinClient(HttpClient? client, string token)

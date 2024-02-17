@@ -35,8 +35,7 @@ public class ReservationApi : IReservationApi
                 dict.Add("after", request.After.Value.ToString(DateTimeOffsetParseConverter.ToStringFormat));
             }
 
-            dict.AddIfNotEmpty("page",request.Page?.ToString());
-            dict.AddIfNotEmpty("per_page",request.PerPage?.ToString());
+            request.AddPaging(dict);
         }
 
         return Client.MakeJsonCall<PagedApiResponse<Reservation[]?>>(HttpMethod.Get, $"reservations/seats", dict);

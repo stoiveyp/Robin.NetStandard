@@ -5,4 +5,5 @@ public interface IRobinApi
     IAuthApi Auth { get; }
     IOrganizationApi Organization { get; }
     IReservationApi Reservation { get; }
+    ISpaceApi Space { get; }
 }
