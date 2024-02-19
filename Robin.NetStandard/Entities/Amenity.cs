@@ -3,22 +3,19 @@ using System.Text.Json.Serialization;
 
 namespace Robin.NetStandard.Entities
 {
-    public class Organization:Entity
+    public class Amenity
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("is_organization")]
-        public bool IsOrganization { get; set; }
+        [JsonPropertyName("account_id")]
+        public int? AccountId { get; set; }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("slug")]
-        public string Slug { get; set; }
-
-        [JsonPropertyName("avatar")]
-        public string Uri { get; set; }
+        [JsonPropertyName("owner_types")]
+        public string[] OwnerTypes { get; set; }
 
         [JsonPropertyName("updated_at")]
         [JsonConverter(typeof(DateTimeOffsetParseConverter))]

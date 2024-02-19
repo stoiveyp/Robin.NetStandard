@@ -1,7 +1,4 @@
 ﻿using Robin.NetStandard.Converters;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Robin.NetStandard.Entities
@@ -30,5 +27,15 @@ namespace Robin.NetStandard.Entities
         [JsonPropertyName("created_at")]
         [JsonConverter(typeof(DateTimeOffsetParseConverter))]
         public DateTimeOffset? CreatedAt { get; set; }
+
+        [JsonPropertyName("disabled_at")]
+        [JsonConverter(typeof(DateTimeOffsetParseConverter))]
+        public DateTimeOffset? DisabledAt{ get; set; }
+
+        [JsonPropertyName("title")]
+        public string Title { get; set; }
+
+        [JsonPropertyName("account")]
+        public Organization Account { get; set; }
     }
 }

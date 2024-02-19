@@ -62,7 +62,7 @@ public class RobinClient:IRobinClient, IRobinApi
 
     private static Uri PathUrl(string methodCall, Dictionary<string, string>? query = null) => new(new Uri(DefaultBaseUrl), methodCall + CreateQueryString(query));
 
-    private static string CreateQueryString(Dictionary<string, string>? query)
+    private static string CreateQueryString(Dictionary<string, string>? query = null)
     {
         if (!query?.Any() ?? true)
         {
