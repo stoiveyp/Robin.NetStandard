@@ -4,11 +4,11 @@ using Robin.NetStandard.Reservations;
 
 namespace Robin.NetStandard;
 
-public class ReservationApi : IReservationApi
+public class ReservationsApi : IReservationsApi
 {
     public IRobinClient Client { get; set; }
 
-    public ReservationApi(IRobinClient client)
+    public ReservationsApi(IRobinClient client)
     {
         Client = client;
     }

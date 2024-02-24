@@ -9,14 +9,14 @@ public class WebOrg
     [Fact]
     public async Task GetById()
     {
-        var res = Utility.ExampleFileContent<ApiResponse<Organization?>?>("Web_Org.json")!;
+        var res = Utility.ExampleFileContent<ApiResponse<NetStandard.Entities.Organization?>?>("Web_Org.json")!;
         var client =
             (IRobinApi)new RobinClient(
                 new HttpClient(
                     new ActionHandler(req => { Utility.ValidateApiCall(HttpMethod.Get, "organizations/test", req); },
                         res)), "token");
 
-        var response = await client.Organization.Get("test");
+        var response = await client.Organizations.Get("test");
         Assert.True(Utility.CompareJson(response, "Web_Org.json", ["created_at", "updated_at"]));
     }
 
@@ -40,7 +40,7 @@ public class WebOrg
             Query = "not",
             Page = 2
         };
-        var response = await client.Organization.GetLocations(request);
+        var response = await client.Organizations.GetLocations(request);
         Assert.True(Utility.CompareJson(response, "Web_Org_Location.json", ["created_at", "updated_at"]));
     }
 
@@ -66,7 +66,7 @@ public class WebOrg
             Page = 2,
             Ids = ["1", "2", "3"]
         };
-        var response = await client.Organization.GetUsers(request);
+        var response = await client.Organizations.GetUsers(request);
         Assert.True(Utility.CompareJson(response, "Web_Org_Users.json", ["created_at", "updated_at"]));
     }
 
@@ -90,7 +90,7 @@ public class WebOrg
             PerPage = 2,
             Page = 2
         };
-        var response = await client.Organization.GetAmenities(request);
+        var response = await client.Organizations.GetAmenities(request);
         Assert.True(Utility.CompareJson(response, "Web_Org_Amenities.json", ["created_at", "updated_at"]));
     }
 }

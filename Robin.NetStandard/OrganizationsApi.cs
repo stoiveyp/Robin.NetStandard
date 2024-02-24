@@ -1,24 +1,23 @@
 ﻿using Robin.NetStandard.Entities;
 using Robin.NetStandard.Organizations;
-using System.Security.Cryptography;
 
 namespace Robin.NetStandard;
 
-public class OrganizationApi : IOrganizationApi
+public class OrganizationsApi : IOrganizationsApi
 {
     public IRobinClient Client { get; set; }
 
-    public OrganizationApi(IRobinClient client)
+    public OrganizationsApi(IRobinClient client)
     {
         Client = client;
     }
 
-    public Task<ApiResponse<Organization?>?> Get(OrganizationId slug)
+    public Task<ApiResponse<Organization?>?> Get(RobinId slug)
     {
         return Client.MakeJsonCall<ApiResponse<Organization?>>(HttpMethod.Get, $"organizations/{slug}");
     }
 
-    public Task<PagedApiResponse<Location[]?>?> GetLocations(OrganizationId orgId) =>
+    public Task<PagedApiResponse<Location[]?>?> GetLocations(RobinId orgId) =>
         GetLocations(new GetLocationRequest { Id = orgId });
 
     public Task<PagedApiResponse<Location[]?>?> GetLocations(GetLocationRequest request)
@@ -31,7 +30,7 @@ public class OrganizationApi : IOrganizationApi
 
     }
 
-    public Task<PagedApiResponse<User[]?>?> GetUsers(OrganizationId orgId) =>
+    public Task<PagedApiResponse<User[]?>?> GetUsers(RobinId orgId) =>
         GetUsers(new GetUsersRequest { Id = orgId });
 
     public Task<PagedApiResponse<User[]?>?> GetUsers(GetUsersRequest request)
@@ -48,10 +47,10 @@ public class OrganizationApi : IOrganizationApi
         return Client.MakeJsonCall<PagedApiResponse<User[]?>>(HttpMethod.Get, $"organizations/{request.Id}/users", prms);
     }
 
-    public Task<ApiResponse<User?>?> GetUser(OrganizationId orgId, int userId) => 
+    public Task<ApiResponse<User?>?> GetUser(RobinId orgId, int userId) => 
         Client.MakeJsonCall<ApiResponse<User?>>(HttpMethod.Get, $"organizations/{orgId}/users/{userId}");
 
-    Task<PagedApiResponse<Amenity[]?>?> IOrganizationApi.GetAmenities(OrganizationId orgId) =>
+    Task<PagedApiResponse<Amenity[]?>?> IOrganizationsApi.GetAmenities(RobinId orgId) =>
         GetAmenities(new GetAmenitiesRequest { Id = orgId });
 
     public Task<PagedApiResponse<Amenity[]?>?> GetAmenities(GetAmenitiesRequest request)

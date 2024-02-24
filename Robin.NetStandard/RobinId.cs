@@ -4,16 +4,16 @@ using Robin.NetStandard.Converters;
 namespace Robin.NetStandard
 {
     [JsonConverter(typeof(OrganizationIdConverter))]
-    public class OrganizationId
+    public class RobinId
     {
-        public OrganizationId(){}
+        public RobinId(){}
 
-        public OrganizationId(int id)
+        public RobinId(int id)
         {
             Id = id;
         }
 
-        public OrganizationId(string slug)
+        public RobinId(string slug)
         {
             Slug = slug;
         }
@@ -22,9 +22,9 @@ namespace Robin.NetStandard
 
         public string? Slug { get; set; }
 
-        public static implicit operator OrganizationId(int id) => new(id);
-        public static implicit operator OrganizationId(string slug) => new(slug);
-        public static implicit operator string(OrganizationId orgId) => orgId.ToString()!;
+        public static implicit operator RobinId(int id) => new(id);
+        public static implicit operator RobinId(string slug) => new(slug);
+        public static implicit operator string(RobinId orgId) => orgId.ToString()!;
 
         public override string ToString() => GetValue()?.ToString()!;
         internal object? GetValue() => Id.HasValue ? Id.Value : Slug;

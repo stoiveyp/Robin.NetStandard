@@ -2,7 +2,7 @@
 
 namespace Robin.NetStandard;
 
-public interface ISpaceApi
+public interface ISpacesApi
 {
     public Task<PagedApiResponse<Seat[]?>?> GetSeats(int spaceId, PagedRequest? paging);
 }

@@ -2,11 +2,11 @@
 
 namespace Robin.NetStandard;
 
-public class SpaceApi : ISpaceApi
+public class SpacesApi : ISpacesApi
 {
     public IRobinClient Client { get; set; }
 
-    public SpaceApi(IRobinClient client)
+    public SpacesApi(IRobinClient client)
     {
         Client = client;
     }

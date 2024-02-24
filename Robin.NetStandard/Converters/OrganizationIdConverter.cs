@@ -3,23 +3,23 @@ using System.Text.Json.Serialization;
 
 namespace Robin.NetStandard.Converters
 {
-    public class OrganizationIdConverter:JsonConverter<OrganizationId>
+    public class OrganizationIdConverter:JsonConverter<RobinId>
     {
-        public override OrganizationId? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override RobinId? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)
             {
                 var value = reader.GetString();
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    return new OrganizationId(value);
+                    return new RobinId(value);
                 }
             }
             
-            return reader.TokenType == JsonTokenType.Number ? new OrganizationId(reader.GetInt32()) : null;
+            return reader.TokenType == JsonTokenType.Number ? new RobinId(reader.GetInt32()) : null;
         }
 
-        public override void Write(Utf8JsonWriter writer, OrganizationId value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, RobinId value, JsonSerializerOptions options)
         {
             if (value.Id.HasValue)
             {

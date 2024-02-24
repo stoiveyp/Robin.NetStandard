@@ -17,14 +17,17 @@ public class RobinClient:IRobinClient, IRobinApi
     private IAuthApi? _auth;
     public IAuthApi Auth => _auth ??= new AuthApi(this);
 
-    private IOrganizationApi? _org;
-    public IOrganizationApi Organization => _org ??= new OrganizationApi(this);
+    private IOrganizationsApi? _org;
+    public IOrganizationsApi Organizations => _org ??= new OrganizationsApi(this);
 
-    private IReservationApi? _res;
-    public IReservationApi Reservation => _res ??= new ReservationApi(this);
+    private IReservationsApi? _res;
+    public IReservationsApi Reservations => _res ??= new ReservationsApi(this);
 
-    private ISpaceApi? _space;
-    public ISpaceApi Space => _space ??= new SpaceApi(this);
+    private ISpacesApi? _space;
+    public ISpacesApi Spaces => _space ??= new SpacesApi(this);
+
+    private IUsersApi _users;
+    public IUsersApi Users => _users ??= new UsersApi(this);
 
     public RobinClient(string token) : this(null, token) { }
 

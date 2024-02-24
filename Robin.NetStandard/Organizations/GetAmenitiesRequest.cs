@@ -2,5 +2,5 @@
 
 public class GetAmenitiesRequest : PagedRequest
 {
-    public OrganizationId Id { get; set; }
+    public RobinId Id { get; set; }
 }
