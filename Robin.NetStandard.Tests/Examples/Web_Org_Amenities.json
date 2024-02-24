@@ -9,7 +9,6 @@
   "data": [
     {
       "id": 6344,
-      "account_id": null,
       "name": "Headphones",
       "owner_types": [
         "seat"
@@ -19,7 +18,6 @@
     },
     {
       "id": 1248,
-      "account_id": null,
       "name": "Laptop Stand",
       "owner_types": [
         "seat"
