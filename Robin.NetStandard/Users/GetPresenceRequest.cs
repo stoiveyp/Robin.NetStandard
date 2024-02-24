@@ -2,6 +2,6 @@
 {
     public class GetPresenceRequest:PagedRequest
     {
-        public RobinId Id { get; }
+        public RobinId Id { get; set; }
     }
 }

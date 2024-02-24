@@ -17,13 +17,10 @@ public class UsersApi:IUsersApi{
         return Client.MakeJsonCall<ApiResponse<User?>>(HttpMethod.Get, $"users/{userId}");
     }
 
-    public Task<PagedApiResponse<Presence[]?>?> Presence(RobinId userId)
-    {
-        throw new NotImplementedException();
-    }
+    public Task<PagedApiResponse<Presence[]?>?> Presence(RobinId userId) => Presence(new GetPresenceRequest { Id = userId });
 
-    public Task<PagedApiResponse<Presence[]?>?> Presence(GetPresenceRequest userId)
+    public Task<PagedApiResponse<Presence[]?>?> Presence(GetPresenceRequest request)
     {
-        throw new NotImplementedException();
+        return Client.MakeJsonCall<PagedApiResponse<Presence[]?>?>(HttpMethod.Get,$"users/{request.Id}/presence", request.AddPaging());
     }
 }
